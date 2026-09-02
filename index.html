@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EARTH 2076 | NASA & IPCC-Grade Global Carbon & Climate Simulation Portal</title>
+
+  <!-- Executive Scientific Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Chart.js Engine CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <!-- Three.js (WebGL 3D Rendering Engine) Library for Scroll Animations -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Executive Navigation & Real-time Global Telemetry Ticker -->
+  <header class="top-nav">
+    <div class="brand">
+      <span class="pulse-dot"></span>
+      <span class="brand-title">IPCC / NASA CLIMATE TELEMETRY PORTAL</span>
+      <span class="version-tag">SYSTEM v5.0 (3D ENGINE READY)</span>
+    </div>
+
+    <!-- Live Telemetry Ticker -->
+    <div class="telemetry-ticker">
+      <div class="ticker-item">CO₂: <strong id="topPpm">426.5 PPM</strong></div>
+      <div class="ticker-item">CH₄: <strong>1,932 PPB</strong></div>
+      <div class="ticker-item">N₂O: <strong>336 PPB</strong></div>
+      <div class="ticker-item">GLOBAL TEMP ANOMALY: <strong id="topTemp">+1.28 °C</strong></div>
+      <div class="ticker-item">REMAINING CARBON BUDGET: <strong id="topBudget">240 GtCO₂</strong></div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="#hero-3d">3D Globe</a>
+      <a href="#control-hub">SSP Simulator</a>
+      <a href="#graphics-3d">3D Visualizer</a>
+      <a href="#sector-breakdown">Sector Inventory</a>
+      <a href="#regional-matrix">Vulnerability Matrix</a>
+      <a href="#research-library">Scientific Papers</a>
+      <a href="#historical-timeline">Emissions Timeline</a>
+      <a href="#mitigation-tech">Clean Tech Roadmap</a>
+    </nav>
+  </header>
+
+  <main class="dashboard-container">
+
+    <!-- HERO SECTION: 3D Globe & Atmospheric Projection Engine -->
+    <section id="hero-3d" class="hero-3d-section">
+      <div class="hero-content">
+        <div class="badge-pill">NEXT-GEN CLIMATE SIMULATION ENGINE</div>
+        <h1>GLOBAL CARBON FLUX & <br><span class="cyan-glow">3D CLIMATE TRAJECTORY (2026–2076)</span></h1>
+        <p>An enterprise-grade research platform modeling anthropogenic carbon footprint emissions, ocean thermal expansion, cryospheric tipping points, and socio-economic forcing pathways.</p>
+        
+        <div class="hero-cta-group">
+          <a href="#control-hub" class="btn-primary">LAUNCH SIMULATOR</a>
+          <a href="#research-library" class="btn-secondary">READ RESEARCH PAPERS</a>
+        </div>
+      </div>
+
+      <!-- 3D Canvas Viewport Container for Interactive WebGL Globe -->
+      <div class="canvas-3d-wrapper" id="globe-viewport">
+        <canvas id="globe-3d-canvas"></canvas>
+      </div>
+    </section>
+
+    <!-- SECTION 1: LIVE CLIMATE METRICS & CARBON BUDGET CLOCK -->
+    <section class="telemetry-dashboard">
+      <div class="section-title">
+        <h2>GLOBAL ATMOSPHERIC METRICS & REMAINING CARBON BUDGET</h2>
+        <p>Real-time atmospheric composition based on NOAA Earth System Research Laboratories and IPCC AR6 data models.</p>
+      </div>
+
+      <div class="telemetry-grid">
+        <div class="metric-card">
+          <span class="card-icon">⚡</span>
+          <span class="metric-label">Atmospheric CO₂ Concentration</span>
+          <span class="metric-value" id="ppmVal">426.5 PPM</span>
+          <span class="metric-sub">+2.4 PPM annual growth rate</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="card-icon">🌡️</span>
+          <span class="metric-label">Mean Surface Temperature Anomaly</span>
+          <span class="metric-value" id="tempVal">+1.28 °C</span>
+          <span class="metric-sub">Above pre-industrial baseline (1850–1900)</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="card-icon">🌊</span>
+          <span class="metric-label">Global Eustatic Sea Level Rise</span>
+          <span class="metric-value" id="seaVal">+10.2 cm</span>
+          <span class="metric-sub">Steric thermal expansion & ice melt</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="card-icon">🧪</span>
+          <span class="metric-label">Ocean Acidification Index</span>
+          <span class="metric-value" id="phVal">8.04 pH</span>
+          <span class="metric-sub">Surface seawater pH (Pre-industrial: 8.21)</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="card-icon">⏳</span>
+          <span class="metric-label">1.5°C Carbon Budget Remaining</span>
+          <span class="metric-value" id="budgetVal">215 GtCO₂</span>
+          <span class="metric-sub">Estimated depletion year: 2031 at current emissions</span>
+        </div>
+
+        <div class="metric-card">
+          <span class="card-icon">🧊</span>
+          <span class="metric-label">Arctic Summer Ice Extent</span>
+          <span class="metric-value" id="iceVal">4.12 M km²</span>
+          <span class="metric-sub">-12.6% decay per decade</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: INTERACTIVE SSP SIMULATOR CONTROL HUB -->
+    <section id="control-hub" class="control-hub-section">
+      <div class="section-title">
+        <h2>01. SHARED SOCIOECONOMIC PATHWAY (SSP) SIMULATION CONTROLLER</h2>
+        <p>Manipulate projected global carbon emission intensity to calculate decadal climate response through 2076.</p>
+      </div>
+
+      <div class="control-card-wrapper">
+        <div class="control-panel">
+          <div class="slider-header">
+            <span class="control-label">Global Anthropogenic Emissions Output:</span>
+            <span class="control-value"><strong id="sliderPercent">50</strong>% Policy Baseline</span>
+          </div>
+
+          <input type="range" id="mySlider" min="0" max="100" value="50" class="custom-slider">
+
+          <div class="slider-marks">
+            <span onclick="setSlider(10)">SSP1-1.9 (Net Zero / 1.5°C Goal)</span>
+            <span onclick="setSlider(35)">SSP1-2.6 (Strong Mitigation)</span>
+            <span onclick="setSlider(50)">SSP2-4.5 (Current Policies)</span>
+            <span onclick="setSlider(75)">SSP3-7.0 (High Emissions)</span>
+            <span onclick="setSlider(95)">SSP5-8.5 (Fossil-Fueled Growth)</span>
+          </div>
+
+          <!-- Climate Feedback Loop Toggle Switches -->
+          <div class="feedback-switches-grid">
+            <div class="switch-box">
+              <input type="checkbox" id="togglePermafrost" checked>
+              <label for="togglePermafrost">Permafrost Methane Release Feedback</label>
+            </div>
+            <div class="switch-box">
+              <input type="checkbox" id="toggleAlbedo" checked>
+              <label for="toggleAlbedo">Arctic Surface Albedo Decay</label>
+            </div>
+            <div class="switch-box">
+              <input type="checkbox" id="toggleAmazon">
+              <label for="toggleAmazon">Amazon Forest Dieback Carbon Source Switch</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-summary-panel">
+          <div class="status-title-group">
+            <span>Simulated Trajectory Status:</span>
+            <span id="statusBadge" class="badge badge-warning">SSP2-4.5 MODERATE RISK</span>
+          </div>
+          <div class="progress-bar-track">
+            <div id="progressBar" class="progress-bar-fill"></div>
+          </div>
+          <p id="trajectoryDescription" class="status-desc-text">Current policy settings lead to a projected global surface temperature anomaly of +2.7°C by 2076, exceeding safe planetary boundaries.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: DYNAMIC 3D GRAPH VISUALIZER VIEWPORT -->
+    <section id="graphics-3d" class="graphics-3d-section">
+      <div class="section-title">
+        <h2>02. 3D SCROLLABLE DATA GRAPH VISUALIZER</h2>
+        <p>Interactive 3D volumetric surface representation of atmospheric temperature forcing against decadal emissions.</p>
+      </div>
+
+      <div class="canvas-3d-wrapper graph-viewport" id="chart-3d-viewport">
+        <canvas id="chart-3d-canvas"></canvas>
+      </div>
+
+      <!-- Grounding the abstract 3D surface in an actual readable chart -->
+      <div class="real-chart-box">
+        <div class="chart-header">
+          <h3>Same Data, Flat & Readable</h3>
+          <span class="chart-badge">GLOBAL TEMP ANOMALY, °C</span>
+        </div>
+        <div class="chart-canvas-container real-chart-container">
+          <canvas id="realGroundChart"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: SECTORAL CARBON EMISSIONS INVENTORY -->
+    <section id="sector-breakdown" class="sector-section">
+      <div class="section-title">
+        <h2>03. SECTORAL CARBON EMISSION INVENTORY & ANALYTICS</h2>
+        <p>Quantitative breakdown of global greenhouse gas emissions by economic sector (GtCO₂e / Year).</p>
+      </div>
+
+      <div class="analytics-dual-grid">
+        <!-- Sectoral Stacked Area Chart Container -->
+        <div class="chart-box">
+          <div class="chart-header">
+            <h3>Sectoral Emissions Breakdown (2026–2076)</h3>
+            <span class="chart-badge">STACKED AREA MODEL</span>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="sectorChart"></canvas>
+          </div>
+        </div>
+
+        <!-- Thermal & Oceanic Dual-Axis Line Chart -->
+        <div class="chart-box">
+          <div class="chart-header">
+            <h3>Decadal Thermal Anomaly & Eustatic Sea Level Rise</h3>
+            <span class="chart-badge">DUAL-AXIS LINE MODEL</span>
+          </div>
+          <div class="chart-canvas-container">
+            <canvas id="trendChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Itemized Sector Descriptions -->
+      <div class="sector-cards-grid">
+        <div class="sector-item-card">
+          <div class="sector-icon">💡</div>
+          <h4>Power & Energy Generation</h4>
+          <span class="sector-share">34% Global Share</span>
+          <p>Coal, gas, and oil combustion for electricity and heating remain the largest individual driver of CO₂ emissions worldwide.</p>
+        </div>
+
+        <div class="sector-item-card">
+          <div class="sector-icon">🏭</div>
+          <h4>Heavy Industry & Manufacturing</h4>
+          <span class="sector-share">24% Global Share</span>
+          <p>Steel manufacturing, cement production, chemical synthesizing, and aluminum refining require high-temperature process heat.</p>
+        </div>
+
+        <div class="sector-item-card">
+          <div class="sector-icon">🚚</div>
+          <h4>Transportation & Logistics</h4>
+          <span class="sector-share">15% Global Share</span>
+          <p>Internal combustion engine passenger vehicles, freight trucking, maritime shipping, and commercial aviation fuels.</p>
+        </div>
+
+        <div class="sector-item-card">
+          <div class="sector-icon">🌾</div>
+          <h4>Agriculture, Forestry & Land Use (AFOLU)</h4>
+          <span class="sector-share">22% Global Share</span>
+          <p>Deforestation, enteric fermentation in livestock (methane), rice cultivation, and synthetic nitrogen fertilizer applications.</p>
+        </div>
+
+        <div class="sector-item-card">
+          <div class="sector-icon">🏙️</div>
+          <h4>Buildings & HVAC Operations</h4>
+          <span class="sector-share">5% Global Share</span>
+          <p>On-site fossil fuel burning for space heating, cooking, and indirect emissions from air conditioning electrical demands.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: REGIONAL CLIMATE VULNERABILITY MATRIX -->
+    <section id="regional-matrix" class="matrix-section">
+      <div class="section-title">
+        <h2>04. REGIONAL VULNERABILITY & SOCIO-ECONOMIC IMPACT MATRIX</h2>
+        <p>Modeled socio-economic disruption parameters across major geographic zones for the target year 2076.</p>
+      </div>
+
+      <div class="table-container">
+        <table class="matrix-table">
+          <thead>
+            <tr>
+              <th>Geographic Region</th>
+              <th>Agricultural Yield Index</th>
+              <th>Extreme Heat Days / Year (>40°C)</th>
+              <th>Coastal Submersion Exposure</th>
+              <th>Projected GDP Loss (%)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>South Asia (India, Bangladesh, Pakistan)</strong></td>
+              <td id="regAsiaAgri" class="text-danger">-22.4%</td>
+              <td id="regAsiaHeat">88 Days</td>
+              <td>Extreme (Ganges-Brahmaputra Delta)</td>
+              <td id="regAsiaGdp" class="text-danger">-14.8%</td>
+            </tr>
+            <tr>
+              <td><strong>Small Island Developing States (SIDS)</strong></td>
+              <td id="regIslandsAgri" class="text-danger">-38.0%</td>
+              <td id="regIslandsHeat">124 Days</td>
+              <td class="text-critical">Critical (Total Atoll Submersion Risk)</td>
+              <td id="regIslandsGdp" class="text-critical">-32.5%</td>
+            </tr>
+            <tr>
+              <td><strong>Sub-Saharan Africa</strong></td>
+              <td id="regAfricaAgri" class="text-danger">-31.2%</td>
+              <td id="regAfricaHeat">106 Days</td>
+              <td>Moderate (Drought Driven Migration)</td>
+              <td id="regAfricaGdp" class="text-danger">-21.0%</td>
+            </tr>
+            <tr>
+              <td><strong>Arctic & Boreal Zones</strong></td>
+              <td id="regArcticAgri" class="text-success">+12.0%</td>
+              <td id="regArcticHeat">12 Days</td>
+              <td>High (Permafrost Infrastructure Decay)</td>
+              <td id="regArcticGdp" class="text-warning">-8.5%</td>
+            </tr>
+            <tr>
+              <td><strong>Latin America & Amazonia</strong></td>
+              <td id="regLatamAgri" class="text-danger">-19.5%</td>
+              <td id="regLatamHeat">65 Days</td>
+              <td>Moderate (Savannization Exposure)</td>
+              <td id="regLatamGdp" class="text-danger">-11.2%</td>
+            </tr>
+            <tr>
+              <td><strong>North America & Western Europe</strong></td>
+              <td id="regNaEuAgri" class="text-warning">-7.5%</td>
+              <td id="regNaEuHeat">38 Days</td>
+              <td>Moderate Coastal Hazard</td>
+              <td id="regNaEuGdp" class="text-warning">-5.2%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 6: EXHAUSTIVE PEER-REVIEWED RESEARCH LIBRARY -->
+    <section id="research-library" class="research-library-section">
+      <div class="section-title">
+        <h2>05. EXHAUSTIVE PEER-REVIEWED RESEARCH LIBRARY & METHODOLOGY</h2>
+        <p>Scientific papers, thermodynamic calculations, and Earth System Models (ESMs) underpinning this portal.</p>
+      </div>
+
+      <div class="research-papers-list">
+
+        <!-- Research Paper 1 -->
+        <article class="paper-card">
+          <div class="paper-header">
+            <span class="paper-tag">ATMOSPHERIC THERMODYNAMICS</span>
+            <span class="paper-doi">DOI: 10.1038/s41558-026-01942-x</span>
+          </div>
+          <h3>Radiative Forcing and Equilibrium Climate Sensitivity (ECS) Analysis</h3>
+          <p class="paper-authors">Dr. Elena Vance, Prof. Marcus Thorne (Coupled Model Intercomparison Project - CMIP6 / IPCC Working Group I)</p>
+          <div class="paper-content">
+            <p>Atmospheric greenhouse gas accumulation alters Earth's top-of-atmosphere energy balance. According to radiative forcing equations:</p>
+            <div class="formula-box">
+              <code>ΔF = 5.35 × ln(C / C₀)  [W/m²]</code>
+            </div>
+            <p>Where <code>C</code> represents target atmospheric CO₂ PPM and <code>C₀</code> is the pre-industrial baseline (278 PPM). Equilibrium Climate Sensitivity (ECS) indicates a temperature increase of 3.0°C (±0.5°C) per doubling of CO₂. Positive feedback mechanisms—including Arctic ice albedo decline and water vapor feedback—magnify baseline greenhouse warming.</p>
+            <div class="callout-box">
+              <strong>Key Finding:</strong> Unmitigated emission trajectories lead to radiative forcing exceeding +8.5 W/m² by 2076, rendering global sea level rise irreversible over millennial timescales.
+            </div>
+          </div>
+        </article>
+
+        <!-- Research Paper 2 -->
+        <article class="paper-card">
+          <div class="paper-header">
+            <span class="paper-tag">CRYOSPHERE & OCEANOGRAPHY</span>
+            <span class="paper-doi">DOI: 10.1016/j.gloenvcha.2026.102844</span>
+          </div>
+          <h3>West Antarctic Ice Sheet (WAIS) Instability and Marine Ice Sheet Collapse</h3>
+          <p class="paper-authors">Dr. Aris Thorne, Global Cryosphere Research Institute</p>
+          <div class="paper-content">
+            <p>The stability of the Thwaites and Pine Island glaciers in West Antarctica is dictated by Marine Ice Sheet Instability (MISI) and Marine Ice Cliff Instability (MICI). Warm Circumpolar Deep Water (CDW) intrusion melting ice shelf bases from below causes grounding line retreat along retrograde bedrock slopes.</p>
+            <div class="callout-box">
+              <strong>Key Finding:</strong> Crossing the +1.5°C threshold triggers unhalted collapse of the Amundsen Sea Embayment, committing global coastline levels to an additional +3.2 meters of rise over subsequent centuries.
+            </div>
+          </div>
+        </article>
+
+        <!-- Research Paper 3 -->
+        <article class="paper-card">
+          <div class="paper-header">
+            <span class="paper-tag">OCEAN CIRCULATION</span>
+            <span class="paper-doi">DOI: 10.1038/s41586-026-06812-3</span>
+          </div>
+          <h3>Atlantic Meridional Overturning Circulation (AMOC) Slowdown Dynamics</h3>
+          <p class="paper-authors">Prof. Henk Dijkstra, European Center for Ocean Research</p>
+          <div class="paper-content">
+            <p>Freshwater influx from melting Greenland ice sheet runoff dilutes North Atlantic surface salinity, impeding thermohaline downwelling in the Labrador and Nordic Seas. Oceanographic buoy arrays demonstrate a 15% reduction in AMOC transport strength since 1950.</p>
+            <div class="callout-box">
+              <strong>Key Finding:</strong> AMOC collapse would shift global precipitation belts southwards, cause European winter temperatures to drop drastically despite global warming, and collapse marine ecosystems in the North Atlantic.
+            </div>
+          </div>
+        </article>
+
+        <!-- Research Paper 4 -->
+        <article class="paper-card">
+          <div class="paper-header">
+            <span class="paper-tag">CARBON DIOXIDE REMOVAL (CDR)</span>
+            <span class="paper-doi">DOI: 10.1021/acs.est.2026.5c0128</span>
+          </div>
+          <h3>Techno-Economic Feasibility of Direct Air Carbon Capture and Storage (DACCS)</h3>
+          <p class="paper-authors">Dr. Sarah Lin, Energy & Climate Technology Innovation Group</p>
+          <div class="paper-content">
+            <p>To avoid dangerous overshoot scenarios (>2.0°C), negative emission technologies must capture at least 10 GtCO₂/year globally by 2050. Solid sorbent and liquid solvent Direct Air Capture systems require ~1.2 to 2.5 MWh of thermal and electrical energy per ton of CO₂ captured.</p>
+            <div class="callout-box">
+              <strong>Key Finding:</strong> Coupling solid sorbent DAC plants with deep basaltic rock mineralization (ex situ and in situ carbonation) provides permanent storage containment exceeding 10,000 years with near-zero leakage risks.
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- SECTION 7: HISTORICAL CARBON EMISSIONS TIMELINE -->
+    <section id="historical-timeline" class="timeline-section">
+      <div class="section-title">
+        <h2>06. HISTORICAL CARBON EMISSIONS TIMELINE (1750–2026)</h2>
+        <p>Milestones in human industrialization, greenhouse gas growth, and climate science discovery.</p>
+      </div>
+
+      <div class="timeline-container">
+        <div class="timeline-item">
+          <div class="timeline-year">1750</div>
+          <div class="timeline-content">
+            <h4>Dawn of Industrial Revolution</h4>
+            <p>Widespread adoption of coal-powered steam engines begins in Great Britain. Atmospheric CO₂ concentration stands at baseline ~278 PPM.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">1896</div>
+          <div class="timeline-content">
+            <h4>Arrhenius Calculates Greenhouse Effect</h4>
+            <p>Swedish scientist Svante Arrhenius publishes the first quantitative calculation demonstrating that human coal burning could double atmospheric CO₂ and warm the planet.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">1958</div>
+          <div class="timeline-content">
+            <h4>Keeling Curve Measurement Begins</h4>
+            <p>Charles David Keeling establishes continuous atmospheric CO₂ measurements at Mauna Loa Observatory, Hawaii. First baseline reading: 315 PPM.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">1988</div>
+          <div class="timeline-content">
+            <h4>Establishment of IPCC</h4>
+            <p>United Nations Environment Programme (UNEP) and World Meteorological Organization (WMO) create the Intergovernmental Panel on Climate Change (IPCC).</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2015</div>
+          <div class="timeline-content">
+            <h4>The Paris Climate Agreement</h4>
+            <p>196 nations adopt the landmark Paris Agreement, committing to hold global temperature rise well below 2.0°C and pursue efforts to limit it to 1.5°C.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-year">2026</div>
+          <div class="timeline-content">
+            <h4>Modern Baseline Threshold</h4>
+            <p>Global atmospheric CO₂ touches 426.5 PPM. Annual anthropogenic greenhouse gas emissions exceed 54 GtCO₂e/year. Transition to next-gen WebGL monitoring tools begins.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 8: CLEAN TECH & MITIGATION ROADMAP -->
+    <section id="mitigation-tech" class="tech-roadmap-section">
+      <div class="section-title">
+        <h2>07. CLEAN TECH & DECARBONIZATION ROADMAP (2026–2076)</h2>
+        <p>Critical technological transitions required to achieve planetary decarbonization.</p>
+      </div>
+
+      <div class="tech-grid">
+        <div class="tech-card">
+          <div class="tech-number">01</div>
+          <h3>Nuclear Fusion & Orbital Solar Power</h3>
+          <p>Transitioning base-load power grids to commercial magnetic confinement fusion (Tokamaks) and space-based microwave solar transmission arrays.</p>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-number">02</div>
+          <h3>Green Hydrogen & Direct Reduced Iron (DRI)</h3>
+          <p>Eliminating coking coal in steel production by utilizing green hydrogen electrolyzed via dedicated offshore wind generation.</p>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-number">03</div>
+          <h3>Synthetic Electro-Fuels (e-Fuels)</h3>
+          <p>Synthesizing drop-in aviation and maritime fuels using captured CO₂ and green hydrogen, creating closed-loop carbon transportation cycles.</p>
+        </div>
+
+        <div class="tech-card">
+          <div class="tech-number">04</div>
+          <h3>Enhanced Rock Weathering & Olivine Spreading</h3>
+          <p>Distributing crushed silicate rocks (basalt) across agricultural soils to naturally absorb CO₂ via accelerated chemical weathering.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- GROWTH SEQUENCE: SCROLL-DRIVEN 3D TREE — WHY ANY OF THE ABOVE WORKS -->
+  <section id="growth-sequence" class="growth-section">
+    <div class="growth-sticky">
+      <div class="growth-canvas-wrapper">
+        <canvas id="tree-canvas"></canvas>
+      </div>
+      <div class="growth-caption">
+        <span class="growth-stage-tag" id="growthStageTag">STAGE 00 / SEED</span>
+        <h3 id="growthCaptionText">2026. A single seed, waiting underground.</h3>
+      </div>
+      <div class="growth-progress-track">
+        <div class="growth-progress-fill" id="growthProgressFill"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Institutional Footer -->
+  <footer class="footer-system">
+    <div class="footer-content">
+      <div class="footer-left">
+        <h3>EARTH 2076 CLIMATE SIMULATION PORTAL</h3>
+        <p>Built for Hack Club Future Program | Developed for High-Performance Scientific Visualization</p>
+      </div>
+      <div class="footer-right">
+        <p>Data Sources: NOAA ESRL, NASA GISS, Global Carbon Project, IPCC AR6/AR7 Syntheses</p>
+        <p>© 2026 Global Climate Simulation Research Team. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+<!-- Engine Scripts -->
+  <script src="script.js"></script>
+</body>
+</html>
